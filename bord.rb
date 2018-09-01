@@ -4,7 +4,7 @@ class Bord
       [9,9,9,9,9,9,9,9,9],
       [9,0,0,0,0,0,0,0,9],
       [9,0,0,0,0,0,0,0,9],
-      [9,0,0,1,2,0,0,0,9],
+      [9,0,1,2,0,0,0,0,9],
       [9,0,0,2,1,0,0,0,9],
       [9,0,0,0,0,0,0,0,9],
       [9,0,0,0,0,0,0,0,9],
@@ -15,6 +15,7 @@ class Bord
     @locate_list = []
   end
 
+  #@ban[縦][横]
   def get_ban
     puts "  012345678"
     puts "  ---------"
@@ -24,35 +25,43 @@ class Bord
   end
 
   def put_stone(stone_no,input)
-    # puts stone_no
-    # puts input
-    # puts @ban[2][3]
-    @locate_list[input].split("").each do |value|
-      puts value
-      puts "a"
     reverse_stone(@locate_list[input][0],@locate_list[input][1])
     # right_reverse
-
+    # left_reverse
 
   end
 
-  def right_reverse
-      for i in 1..@ban[0].count - 1
-        for j in 1..@ban[0].count - 1
-          if @ban[i][j] == @my_stone && !(@ban[i][j - 1] == @my_stone) && !(@ban[i][j - 1] == 0)
-            until @ban[i][j - 1] == 9
-              if @ban[i][j - 1] == 0
-                @put_list.push(i.to_s + (j - 1).to_s)
-                break
-              end
-              j = j - 1
-            end
-          end
-        end
-      end
-      return @put_list
-    end
-  end
+  # def right_reverse
+  #     for i in @yoko..@ban[0].count - 1
+  #       if @ban[@tate][i] == @my_stone && !(@ban[@tate][i + 1] == @my_stone) && !(@ban[@tate][i + 1] == 0)
+  #         puts "a#{i}"
+  #         until @ban[@tate][i] == 9
+  #           if @ban[@tate][i] == 0
+  #               puts @ban[@tate][i]
+  #               puts "OK"
+  #             break
+  #           end
+  #           i = i + 1
+  #         end
+  #       end
+  #     end
+  # end
+  #
+  # def left_reverse
+  #     for i in @yoko..@ban[0].count - 1
+  #       if @ban[@tate][i] == @my_stone && !(@ban[@tate][i - 1] == @my_stone) && !(@ban[@tate][i - 1] == 0)
+  #         puts "a#{i}"
+  #         until @ban[@tate][i] == 9
+  #           if @ban[@tate][i] == 0
+  #               puts @ban[@tate][i]
+  #               puts "OK"
+  #             break
+  #           end
+  #           i = i - 1
+  #         end
+  #       end
+  #     end
+  # end
 
   def put_locate_check(stone_no)
     @my_stone = stone_no
@@ -62,6 +71,7 @@ class Bord
     down_check
     up_check
     diagonal_check_right_down
+
     diagonal_check_right_up
     diagonal_check_left_down
     diagonal_check_left_up
@@ -77,8 +87,8 @@ class Bord
   end
 
   def reverse_stone(x,y)
-    @x = x
-    @y = y
+    @tate = x.to_i
+    @yoko = y.to_i
   end
 
   def diagonal_check_right_down
